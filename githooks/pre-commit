@@ -1,0 +1,45 @@
+#!/usr/bin/env zsh
+# @forge (Governance Sentinel)
+# pre-commit - VDE Sentinel Hook
+#
+# Enforces Rule 12 (Security Law) and Mandate 24 (Architectural Tagging).
+set -e
+
+typeset VDE_ROOT_DIR=$(git rev-parse --show-toplevel)
+export VDE_ROOT_DIR
+
+typeset RED='\033[0;31m'
+typeset RESET='\033[0m'
+
+# 1. Secret Sentinel (Rule 12)
+# Scans staged files for hardcoded credentials.
+typeset staged_all
+staged_all=($(git diff --cached --name-only --diff-filter=ACM | grep -v "env.template" | grep -v "env-files/" | grep -v "\.bak$" || true))
+
+for file in "${staged_all[@]}"; do
+    if git diff --cached "$file" | grep -Ei "^[+].*(API_KEY|SECRET|PASSWORD)\s*=" > /dev/null 2>&1; then
+        echo -e "${RED}[ERROR] Rule 12 Violation (Security Law):${RESET}"
+        echo -e "  File '$file' contains potential hardcoded credentials."
+        echo -e "  Use .env files for secrets — never hardcode them."
+        exit 1
+    fi
+done
+
+# 2. Architectural Tagging Check (Mandate 24)
+# Every staged .rs and .md file must have an @armor, @forge, or @shared-law
+# tag on line 2 or 3.
+typeset tag_pattern="@(armor|forge|shared-law)"
+typeset staged_tagged
+staged_tagged=($(git diff --cached --name-only --diff-filter=ACM | grep -E "\.(rs|md)$" || true))
+
+for file in "${staged_tagged[@]}"; do
+    typeset line2=$(git show :"$file" | sed -n '2p')
+    typeset line3=$(git show :"$file" | sed -n '3p')
+    if ! (echo "$line2" | grep -qE "$tag_pattern") && ! (echo "$line3" | grep -qE "$tag_pattern"); then
+        echo -e "${RED}[ERROR] Mandate 24 Violation (Architectural Tagging):${RESET}"
+        echo -e "  File '$file' is missing an @armor, @forge, or @shared-law tag on line 2 or 3."
+        exit 1
+    fi
+done
+
+exit 0

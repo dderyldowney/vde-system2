@@ -1,0 +1,12 @@
+[package]
+name    = "vde"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+vde-lib = { path = "../vde-lib" }
+clap    = { workspace = true }
+tokio   = { workspace = true }
+
+[lints]
+workspace = true

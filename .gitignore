@@ -1,0 +1,65 @@
+# VDE-SYSTEM2 ARCHITECTURAL RECORD
+# @shared-law (Repository Hygiene)
+
+# Rust build artifacts
+target/
+
+# Environment and secrets
+.env
+.env-files/*
+
+# Logs
+logs/*
+*.log
+
+# Backup files
+*.bak
+*.backup
+*.backup.*
+*.old
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python cache (Behave test runner)
+__pycache__/
+*.pyc
+
+# Test output files
+tests/behave-results.json
+tests/pretty.output
+tests/behave-*.json
+behave_output*.txt
+
+# Test artifacts
+tests/.test-tmp/
+tests/test-logs/
+output/
+
+# Session and agent files
+SESSION_STATE.md
+.agents/
+.gemini/settings.json
+.gemini/settings.local.json
+.worktrees/
+
+# Claude Code — entire directory ignored, credentials must never reach the repo
+.claude/
+.claude/.credentials.json
+.claude/settings.local.json
+.claude/sessions/
+.claude/projects/
+.claude/backups/
+.claude/file-history/
+.claude/shell-snapshots/
+
+# Conductor
+conductor/

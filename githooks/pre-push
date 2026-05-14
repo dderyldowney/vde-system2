@@ -1,0 +1,43 @@
+#!/usr/bin/env zsh
+# @forge (Governance Sentinel)
+# pre-push - VDE Gatekeeper Hook
+#
+# Enforces Mandate L (Proof of Life) and cargo test before code leaves the Forge.
+set -e
+
+typeset VDE_ROOT_DIR=$(git rev-parse --show-toplevel)
+export VDE_ROOT_DIR
+
+typeset RED='\033[0;31m'
+typeset GREEN='\033[0;32m'
+typeset RESET='\033[0m'
+
+# 1. Cargo Test Gate
+# Block push if any test fails.
+echo "[PRE-PUSH] Running cargo test..."
+if ! cargo test --manifest-path "${VDE_ROOT_DIR}/Cargo.toml" --quiet; then
+    echo -e "${RED}[ERROR] Pre-Push Blockade (Test Failure):${RESET}"
+    echo -e "  cargo test failed. Fix all test failures before pushing."
+    exit 1
+fi
+echo -e "${GREEN}✓ cargo test passed.${RESET}"
+
+# 2. Proof of Life (Mandate L)
+# Runs the Behave BDD suite. Skipped gracefully if tests do not exist yet.
+typeset pol_feature="${VDE_ROOT_DIR}/tests/features/core-infrastructure/proof-of-life-the-contract.feature"
+
+if [[ -f "${pol_feature}" ]]; then
+    echo "[PRE-PUSH] Running Proof of Life (Mandate L)..."
+    if python3 -m behave "${pol_feature}" --quiet --no-summary; then
+        echo -e "${GREEN}✓ Proof of Life Certified.${RESET}"
+    else
+        echo -e "${RED}[ERROR] Pre-Push Blockade (Heartbeat):${RESET}"
+        echo -e "  Proof of Life contract failed. The core lifecycle is broken."
+        echo -e "  Run: python3 -m behave ${pol_feature}"
+        exit 1
+    fi
+else
+    echo "[PRE-PUSH] Proof of Life feature not yet present — skipping (Mandate L pending)."
+fi
+
+exit 0
