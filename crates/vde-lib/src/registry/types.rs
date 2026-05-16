@@ -25,8 +25,8 @@ pub struct VmType {
     pub display: String,
     /// System packages to install at image build time.
     pub pkgs: Vec<String>,
-    /// Optional path to the setup script relative to project root.
-    pub setup_script: Option<PathBuf>,
+    /// Path to the hydration script, relative to the project root. Required — every VM is hydrated via its init script.
+    pub setup_script: PathBuf,
     /// Exposed service ports (empty for language VMs).
     pub service_ports: Vec<u16>,
     /// The SSH port assigned to this VM.
@@ -63,7 +63,7 @@ mod tests {
             aliases: vec!["py".to_string(), "python3".to_string()],
             display: "Python".to_string(),
             pkgs: vec![],
-            setup_script: None,
+            setup_script: PathBuf::from("scripts/setup/python-init.zsh"),
             service_ports: vec![],
             ssh_port: 2217,
         };
@@ -71,7 +71,10 @@ mod tests {
         assert_eq!(vm.ssh_port, 2217);
         assert!(vm.pkgs.is_empty());
         assert!(vm.service_ports.is_empty());
-        assert!(vm.setup_script.is_none());
+        assert_eq!(
+            vm.setup_script,
+            PathBuf::from("scripts/setup/python-init.zsh")
+        );
     }
 
     #[test]
@@ -82,7 +85,7 @@ mod tests {
             aliases: vec![],
             display: "Python".to_string(),
             pkgs: vec![],
-            setup_script: None,
+            setup_script: PathBuf::from("scripts/setup/python-init.zsh"),
             service_ports: vec![],
             ssh_port: 2217,
         };
@@ -97,7 +100,7 @@ mod tests {
             aliases: vec!["postgres".to_string(), "pg".to_string()],
             display: "PostgreSQL".to_string(),
             pkgs: vec![],
-            setup_script: None,
+            setup_script: PathBuf::from("scripts/setup/postgres-init.zsh"),
             service_ports: vec![5432],
             ssh_port: 2401,
         };
@@ -106,18 +109,21 @@ mod tests {
     }
 
     #[test]
-    fn vm_type_accepts_setup_script() {
+    fn vm_type_stores_setup_script_path() {
         let vm = VmType {
             kind: VmKind::Language,
             name: "vde-python".to_string(),
             aliases: vec![],
             display: "Python".to_string(),
             pkgs: vec!["python3-pip".to_string()],
-            setup_script: Some(PathBuf::from("scripts/setup/python-init.zsh")),
+            setup_script: PathBuf::from("scripts/setup/python-init.zsh"),
             service_ports: vec![],
             ssh_port: 2217,
         };
-        assert!(vm.setup_script.is_some());
+        assert_eq!(
+            vm.setup_script,
+            PathBuf::from("scripts/setup/python-init.zsh")
+        );
         assert!(!vm.pkgs.is_empty());
     }
 }
