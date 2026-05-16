@@ -61,6 +61,8 @@ impl Registry {
 
 #[cfg(test)]
 mod tests {
+    use std::path::PathBuf;
+
     use super::Registry;
     use crate::registry::types::{VmKind, VmType};
 
@@ -71,7 +73,7 @@ mod tests {
             aliases: vec!["py".to_string(), "python3".to_string()],
             display: "Python".to_string(),
             pkgs: vec![],
-            setup_script: None,
+            setup_script: PathBuf::from("scripts/setup/python-init.zsh"),
             service_ports: vec![],
             ssh_port: 2217,
         }
@@ -84,7 +86,7 @@ mod tests {
             aliases: vec!["postgres".to_string(), "pg".to_string()],
             display: "PostgreSQL".to_string(),
             pkgs: vec![],
-            setup_script: None,
+            setup_script: PathBuf::from("scripts/setup/postgres-init.zsh"),
             service_ports: vec![5432],
             ssh_port: 2401,
         }
