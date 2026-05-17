@@ -1,0 +1,326 @@
+{
+  "@armor": "(Beskar Vault)",
+  "version": "2.0.0",
+  "vms": [
+    {
+      "kind": "language",
+      "name": "vde-asm",
+      "aliases": ["asm", "assembler", "nasm"],
+      "display": "Assembler",
+      "pkgs": [],
+      "setup_script": "scripts/setup/asm-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2200
+    },
+    {
+      "kind": "language",
+      "name": "vde-c",
+      "aliases": ["c"],
+      "display": "C",
+      "pkgs": [],
+      "setup_script": "scripts/setup/c-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2201
+    },
+    {
+      "kind": "language",
+      "name": "vde-certified-ghost",
+      "aliases": ["certified-ghost"],
+      "display": "Certified Ghost",
+      "pkgs": [],
+      "setup_script": "scripts/setup/certified-ghost-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2202
+    },
+    {
+      "kind": "language",
+      "name": "vde-cpp",
+      "aliases": ["cpp", "c++", "gcc"],
+      "display": "C++",
+      "pkgs": [],
+      "setup_script": "scripts/setup/cpp-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2203
+    },
+    {
+      "kind": "language",
+      "name": "vde-csharp",
+      "aliases": ["csharp", "dotnet"],
+      "display": "C#",
+      "pkgs": [],
+      "setup_script": "scripts/setup/csharp-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2204
+    },
+    {
+      "kind": "language",
+      "name": "vde-displaytest",
+      "aliases": ["displaytest"],
+      "display": "Go Language",
+      "pkgs": [],
+      "setup_script": "scripts/setup/displaytest-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2205
+    },
+    {
+      "kind": "language",
+      "name": "vde-elixir",
+      "aliases": ["elixir", "ex", "iex"],
+      "display": "Elixir",
+      "pkgs": [],
+      "setup_script": "scripts/setup/elixir-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2206
+    },
+    {
+      "kind": "language",
+      "name": "vde-flutter",
+      "aliases": ["flutter", "dart"],
+      "display": "Flutter",
+      "pkgs": [],
+      "setup_script": "scripts/setup/flutter-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2207
+    },
+    {
+      "kind": "language",
+      "name": "vde-go",
+      "aliases": ["go", "golang"],
+      "display": "Go",
+      "pkgs": [],
+      "setup_script": "scripts/setup/go-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2208
+    },
+    {
+      "kind": "language",
+      "name": "vde-haskell",
+      "aliases": ["haskell", "hs"],
+      "display": "Haskell",
+      "pkgs": [],
+      "setup_script": "scripts/setup/haskell-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2209
+    },
+    {
+      "kind": "language",
+      "name": "vde-java",
+      "aliases": ["java"],
+      "display": "Java",
+      "pkgs": [],
+      "setup_script": "scripts/setup/java-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2210
+    },
+    {
+      "kind": "language",
+      "name": "vde-js",
+      "aliases": ["js", "javascript", "node"],
+      "display": "JavaScript",
+      "pkgs": [],
+      "setup_script": "scripts/setup/js-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2211
+    },
+    {
+      "kind": "language",
+      "name": "vde-kotlin",
+      "aliases": ["kotlin", "kt"],
+      "display": "Kotlin",
+      "pkgs": [],
+      "setup_script": "scripts/setup/kotlin-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2212
+    },
+    {
+      "kind": "language",
+      "name": "vde-lamp",
+      "aliases": ["lamp"],
+      "display": "LAMP Stack (PHP + MySQL + Nginx)",
+      "pkgs": [],
+      "setup_script": "scripts/setup/lamp-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2213
+    },
+    {
+      "kind": "language",
+      "name": "vde-lua",
+      "aliases": ["lua"],
+      "display": "Lua",
+      "pkgs": [],
+      "setup_script": "scripts/setup/lua-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2214
+    },
+    {
+      "kind": "language",
+      "name": "vde-mean",
+      "aliases": ["mean"],
+      "display": "MEAN Stack (Node + MongoDB)",
+      "pkgs": [],
+      "setup_script": "scripts/setup/mean-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2215
+    },
+    {
+      "kind": "language",
+      "name": "vde-php",
+      "aliases": ["php"],
+      "display": "PHP",
+      "pkgs": [],
+      "setup_script": "scripts/setup/php-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2216
+    },
+    {
+      "kind": "language",
+      "name": "vde-python",
+      "aliases": ["py", "python3"],
+      "display": "Python",
+      "pkgs": [],
+      "setup_script": "scripts/setup/python-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2217
+    },
+    {
+      "kind": "language",
+      "name": "vde-ruby",
+      "aliases": ["ruby", "rb"],
+      "display": "Ruby",
+      "pkgs": [],
+      "setup_script": "scripts/setup/ruby-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2218
+    },
+    {
+      "kind": "language",
+      "name": "vde-rust",
+      "aliases": ["rust", "rs"],
+      "display": "Rust",
+      "pkgs": [],
+      "setup_script": "scripts/setup/rust-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2219
+    },
+    {
+      "kind": "language",
+      "name": "vde-scala",
+      "aliases": ["scala"],
+      "display": "Scala",
+      "pkgs": [],
+      "setup_script": "scripts/setup/scala-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2220
+    },
+    {
+      "kind": "language",
+      "name": "vde-swift",
+      "aliases": ["swift"],
+      "display": "Swift",
+      "pkgs": [],
+      "setup_script": "scripts/setup/swift-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2221
+    },
+    {
+      "kind": "language",
+      "name": "vde-testport1",
+      "aliases": ["testport1"],
+      "display": "Test Port 1",
+      "pkgs": [],
+      "setup_script": "scripts/setup/testport1-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2222
+    },
+    {
+      "kind": "language",
+      "name": "vde-testport2",
+      "aliases": ["testport2"],
+      "display": "Test Port 2",
+      "pkgs": [],
+      "setup_script": "scripts/setup/testport2-init.zsh",
+      "service_ports": [],
+      "ssh_port": 2223
+    },
+    {
+      "kind": "service",
+      "name": "vde-couchdb",
+      "aliases": ["couchdb"],
+      "display": "CouchDB",
+      "pkgs": [],
+      "setup_script": "scripts/setup/couchdb-init.zsh",
+      "service_ports": [5984],
+      "ssh_port": 2400
+    },
+    {
+      "kind": "service",
+      "name": "vde-jupyterlab",
+      "aliases": ["jupyterlab", "notebook"],
+      "display": "JupyterLab",
+      "pkgs": ["python3-pip", "python3-venv", "tini"],
+      "setup_script": "scripts/setup/jupyterlab-init.zsh",
+      "service_ports": [8888],
+      "ssh_port": 2401
+    },
+    {
+      "kind": "service",
+      "name": "vde-mongodb",
+      "aliases": ["mongodb", "mongo"],
+      "display": "MongoDB",
+      "pkgs": [],
+      "setup_script": "scripts/setup/mongodb-init.zsh",
+      "service_ports": [27017],
+      "ssh_port": 2402
+    },
+    {
+      "kind": "service",
+      "name": "vde-mysql",
+      "aliases": ["mysql"],
+      "display": "MySQL",
+      "pkgs": [],
+      "setup_script": "scripts/setup/mysql-init.zsh",
+      "service_ports": [3306],
+      "ssh_port": 2403
+    },
+    {
+      "kind": "service",
+      "name": "vde-nginx",
+      "aliases": ["nginx"],
+      "display": "Nginx",
+      "pkgs": [],
+      "setup_script": "scripts/setup/nginx-init.zsh",
+      "service_ports": [80, 443],
+      "ssh_port": 2404
+    },
+    {
+      "kind": "service",
+      "name": "vde-postgres",
+      "aliases": ["postgres", "psql", "postgresql"],
+      "display": "PostgreSQL",
+      "pkgs": [],
+      "setup_script": "scripts/setup/postgres-init.zsh",
+      "service_ports": [5432],
+      "ssh_port": 2405
+    },
+    {
+      "kind": "service",
+      "name": "vde-rabbitmq",
+      "aliases": ["rabbitmq", "mq"],
+      "display": "RabbitMQ",
+      "pkgs": [],
+      "setup_script": "scripts/setup/rabbitmq-init.zsh",
+      "service_ports": [5672, 15672],
+      "ssh_port": 2406
+    },
+    {
+      "kind": "service",
+      "name": "vde-redis",
+      "aliases": ["redis"],
+      "display": "Redis",
+      "pkgs": [],
+      "setup_script": "scripts/setup/redis-init.zsh",
+      "service_ports": [6379],
+      "ssh_port": 2407
+    }
+  ]
+}

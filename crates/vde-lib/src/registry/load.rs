@@ -2,8 +2,27 @@
 // @armor (Engine Core)
 
 use std::collections::HashMap;
+use std::fs::File;
+use std::path::Path;
 
 use crate::registry::types::{VmKind, VmType};
+
+/// Errors that can occur while loading the registry from the Beskar Vault.
+#[derive(Debug, thiserror::Error)]
+pub enum RegistryError {
+    /// The registry file could not be opened.
+    #[error("could not open registry file: {0}")]
+    Io(#[from] std::io::Error),
+    /// The registry file contained malformed or unexpected JSON.
+    #[error("could not parse registry JSON: {0}")]
+    Parse(#[from] serde_json::Error),
+}
+
+#[derive(serde::Deserialize)]
+struct RegistryJson {
+    version: String,
+    vms: Vec<VmType>,
+}
 
 /// Runtime lookup index for all VM types.
 pub struct Registry {
@@ -34,6 +53,17 @@ impl Registry {
             vms,
             by_alias,
         }
+    }
+
+    /// Load a `Registry` from the Beskar Vault JSON file at `path`.
+    ///
+    /// # Errors
+    /// Returns `RegistryError::Io` if the file cannot be opened.
+    /// Returns `RegistryError::Parse` if the JSON is malformed or does not match the expected shape.
+    pub fn from_json(path: &Path) -> Result<Self, RegistryError> {
+        let file = File::open(path)?;
+        let raw: RegistryJson = serde_json::from_reader(file)?;
+        Ok(Registry::new(raw.version, raw.vms))
     }
 
     /// Look up a VM by any alias or its canonical name.
@@ -152,5 +182,18 @@ mod tests {
         let reg = Registry::new("1.0".to_string(), vec![]);
         assert!(reg.get("anything").is_none());
         assert!(reg.all().is_empty());
+    }
+
+    #[test]
+    fn from_json_loads_registry_from_beskar_vault() {
+        let path =
+            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data/vm-types.json");
+        let reg = Registry::from_json(path.as_path()).expect("Beskar Vault must load");
+        assert!(!reg.all().is_empty());
+        assert!(reg.get("vde-python").is_some());
+        assert!(reg.get("vde-postgres").is_some());
+        assert_eq!(reg.get("py").unwrap().name, "vde-python");
+        let version = reg.version.clone();
+        assert!(!version.is_empty());
     }
 }

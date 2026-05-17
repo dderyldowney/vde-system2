@@ -1,0 +1,85 @@
+{
+  "@armor": "(Engine Core)",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vde.local/schemas/vm-types.schema.json",
+  "title": "VDE VM Type Configuration",
+  "description": "Schema for VDE VM type static configuration. The Beskar Vault — sole authority for VM type data.",
+  "type": "object",
+  "required": ["version", "vms"],
+  "properties": {
+    "@armor": {
+      "type": "string",
+      "description": "Architectural lineage tag"
+    },
+    "version": {
+      "type": "string",
+      "description": "Configuration version",
+      "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+(-sp[0-9]+)?)?$"
+    },
+    "vms": {
+      "type": "array",
+      "description": "Flat list of all VM type definitions",
+      "items": {
+        "$ref": "#/definitions/vmType"
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "vmType": {
+      "type": "object",
+      "required": ["kind", "name", "display", "setup_script", "ssh_port"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["language", "service"],
+          "description": "Whether this is a language VM (ssh_port 2200-2399) or service VM (ssh_port 2400-2499)"
+        },
+        "name": {
+          "type": "string",
+          "pattern": "^vde-[a-z0-9-]+$",
+          "description": "Canonical VM identifier used for container naming and SSH config"
+        },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Alternative names accepted by the CLI",
+          "default": []
+        },
+        "display": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable name for UI and logging"
+        },
+        "pkgs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "System packages to install at image build time",
+          "default": []
+        },
+        "setup_script": {
+          "type": "string",
+          "description": "Path to the hydration script, relative to the project root"
+        },
+        "service_ports": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "description": "Ports exposed by this service VM; empty for language VMs",
+          "default": []
+        },
+        "ssh_port": {
+          "type": "integer",
+          "minimum": 2200,
+          "maximum": 2499,
+          "description": "SSH port on the Docker host"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

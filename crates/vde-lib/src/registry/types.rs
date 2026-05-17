@@ -1,10 +1,12 @@
 // VmKind and VmType — the core data model for the VM registry.
 // @armor (Engine Core)
 
+use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
 /// Whether a VM is a language environment or a backing service.
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum VmKind {
     /// A language VM (`ssh_port` 2200–2399). e.g. vde-python, vde-rust.
     Language,
@@ -13,7 +15,7 @@ pub enum VmKind {
 }
 
 /// A single VM type entry from the registry.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VmType {
     /// Whether this is a language or service VM.
     pub kind: VmKind,
