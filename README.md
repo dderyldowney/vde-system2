@@ -1,8 +1,12 @@
-# vde-system2
-<!-- @forge (Project Documentation) -->
+Hi,
 
-A complete rewrite of [vde-system](https://github.com/dderyldowney/vde-system) in Rust.
+I hope you're doing well.
 
-**Status**: Under active development. Not yet functional.
-**Current version**: 2.0.0 (pre-release)
-**Original**: vde-system 1.5.5 (zsh)
+I'd like to schedule a brief call to discuss a potential project collaboration. If you're interested, please feel free to book a time that works for you using the link below:
+
+Book a meeting: https://calendly.com/charljustineompoc/interview
+
+I look forward to connecting with you.
+
+Best regards,
+Charl
